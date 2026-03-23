@@ -4,14 +4,12 @@
 
 { inputs, self, ... }:
 {
-  flake.nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
-    modules = [ self.nixosModules.laptop ];
-  };
-
   flake.nixosModules.laptop = { pkgs, ... }: {
 
     # Import NixOS modules.
     imports = [
+      self.nixosModules.laptopHardware
+
       self.nixosModules.fastfetch
       self.nixosModules.gamedev
       self.nixosModules.gaming

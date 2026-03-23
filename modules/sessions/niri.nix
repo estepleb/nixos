@@ -1,6 +1,6 @@
-{ self, lib, ... }:
+{ self, ... }:
 {
-  flake.nixosModules.niri = { pkgs, ... }:
+  flake.nixosModules.niri = { pkgs, lib, ... }:
   {
     imports = [
       self.nixosModules.wofi 

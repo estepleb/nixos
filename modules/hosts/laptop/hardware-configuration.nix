@@ -3,7 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 
 {
-  flake.nixosModules.laptop = { config, lib, pkgs, modulesPath, ... }: {
+  flake.nixosModules.laptopHardware = { config, lib, pkgs, modulesPath, ... }: {
     imports =
       [ (modulesPath + "/installer/scan/not-detected.nix")
       ];
