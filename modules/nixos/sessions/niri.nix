@@ -16,6 +16,7 @@
 
     environment.systemPackages = with pkgs; [
       brightnessctl
+      btop
       dunst
       eog
       gnome-themes-extra
@@ -27,6 +28,7 @@
       pywal
       swaybg
       waybar
+      wl-clipboard
       wlsunset
       xwayland-satellite
     ];
