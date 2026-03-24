@@ -12,6 +12,9 @@
       dotnet-sdk
       godot-mono
       obs-studio
+      # wine
+      wineWow64Packages.stable
+      winetricks
     ];
   };
 }
