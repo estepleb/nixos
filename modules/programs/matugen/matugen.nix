@@ -1,6 +1,11 @@
+{ self, ... }:
 {
   flake.nixosModules.matugen = { pkgs, lib, ... }:
   {
+    imports = [
+      self.nixosModules.bash
+    ];
+
     home-manager.users.matthew.imports = [
     {
       home.packages = with pkgs; [ 
