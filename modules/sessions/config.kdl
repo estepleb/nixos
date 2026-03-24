@@ -277,10 +277,10 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar" // Bar.
 spawn-at-startup "dunst" // Notification daemon.
-spawn-sh-at-startup "swaybg -i /mnt/data/pictures/Bierstadt_Mount_Baker_Washington.jpg" // Wallpaper utility.
 spawn-sh-at-startup "wlsunset -l 43.2 -L 76.9 -t 5000" // Night light utility.
-spawn-sh-at-startup "wal -i /mnt/data/pictures/Bierstadt_Mount_Baker_Washington.jpg --cols16"
-spawn-sh-at-startup "matugen image /mnt/data/pictures/Bierstadt_Mount_Baker_Washington.jpg"
+spawn-sh-at-startup "swaybg -i /home/matthew/pictures/iriza-katou.jpg" // Wallpaper utility.
+spawn-sh-at-startup "wal -i /home/matthew/pictures/iriza-katou.jpg --cols16 --saturate 0.15"
+spawn-sh-at-startup "matugen image /home/matthew/pictures/iriza-katou.jpg";
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

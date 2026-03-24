@@ -11,6 +11,7 @@
       # aseprite
       dotnet-sdk
       godot-mono
+      obs-studio
     ];
   };
 }

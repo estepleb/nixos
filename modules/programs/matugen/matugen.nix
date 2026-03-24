@@ -7,6 +7,7 @@
         matugen
         kdePackages.breeze
         kdePackages.qt6ct
+        killall
         libsForQt5.qt5ct
       ];
 
