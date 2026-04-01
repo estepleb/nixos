@@ -11,6 +11,7 @@
     programs.niri.enable = true;
     # services.displayManager.gdm.enable = true;
     services.displayManager.ly.enable = true;
+    security.polkit.enable = true; # Enable polkit.
 
     services.udisks2.enable = true; # Removable media.
     services.gvfs.enable = true; # Nautilus mount and trash support.
@@ -67,6 +68,7 @@
       # Set GTK theme.
       gtk = {
         enable = true;
+        gtk4.theme = null;
         theme = {
           name = "adw-gtk3-dark";
           package = pkgs.adw-gtk3;
