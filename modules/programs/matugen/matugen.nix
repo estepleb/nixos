@@ -8,6 +8,12 @@
 
     home-manager.users.matthew.imports = [
     {
+      home.activation = {
+        matugen = ''
+          ${pkgs.matugen}/bin/matugen image /home/matthew/Pictures/iriza-katou.jpg --source-color-index 0
+        '';
+      };
+      
       home.packages = with pkgs; [ 
         matugen
         kdePackages.breeze

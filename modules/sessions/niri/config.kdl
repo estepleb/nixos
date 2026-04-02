@@ -275,12 +275,12 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
+// spawn-sh-at-startup "wal -i /home/matthew/Pictures/iriza-katou.jpg --cols16 --saturate 0.15"
+// spawn-sh-at-startup "matugen image /home/matthew/Pictures/iriza-katou.jpg --source-color-index 0";
+spawn-sh-at-startup "swaybg -i /home/matthew/Pictures/iriza-katou.jpg" // Wallpaper utility.
 spawn-at-startup "waybar" // Bar.
 spawn-at-startup "dunst" // Notification daemon.
 spawn-sh-at-startup "wlsunset -l 43.2 -L 76.9 -t 5000" // Night light utility.
-spawn-sh-at-startup "swaybg -i /home/matthew/Pictures/iriza-katou.jpg" // Wallpaper utility.
-spawn-sh-at-startup "wal -i /home/matthew/Pictures/iriza-katou.jpg --cols16 --saturate 0.15"
-spawn-sh-at-startup "matugen image /home/matthew/Pictures/iriza-katou.jpg";
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

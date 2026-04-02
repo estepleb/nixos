@@ -37,6 +37,12 @@
 
     home-manager.users.matthew.imports = [
     {
+      home.activation = {
+        pywal = ''
+          ${pkgs.pywal}/bin/wal -i /home/matthew/Pictures/iriza-katou.jpg --cols16 --saturate 0.15
+        '';
+      };
+
       services.polkit-gnome.enable = true; # Enable Gnome polkit.
 
       # Symlink config file.
