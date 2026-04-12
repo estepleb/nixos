@@ -18,7 +18,7 @@
           enable = true;
           settings = {
             vim = {
-              luaConfigPost = ''
+              luaConfigPost = /* lua */ ''
                 vim.opt.shiftwidth = 2
                 -- vim.opt.colorcolumn = "80"
               '';

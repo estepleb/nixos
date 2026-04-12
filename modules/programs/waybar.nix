@@ -17,10 +17,10 @@
         settings = {
           bar = {
             height = 24;
-            spacing = 4;
+            spacing = 0;
             modules-left = [ "niri/workspaces" "niri/language" ];
             modules-center = [ "niri/window" ];
-            modules-right = [ "tray" "wireplumber" "network" "bluetooth" "power-profiles-daemon" "backlight" "battery" "battery#bat2" "clock" "custom/power" ];
+            modules-right = [ "tray" "wireplumber" "network" "bluetooth" "backlight" "clock" "battery" "battery#bat2" "custom/power" ];
             "niri/workspaces" = {
               "disable-scroll" = true;
               "all-outputs" = true;
@@ -32,10 +32,9 @@
             };
             "clock" = {
                 "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-                "format-alt" = "{:%Y-%m-%d}";
             };
             "backlight" = {
-                "format" = "{percent}% {icon}";
+                "format" = "{icon} {percent}%";
                 "format-icons" = ["" "" "" "" "" "" "" "" ""];
             };
             "battery" = {
@@ -49,7 +48,6 @@
                 "format-full" = "{icon} {capacity}%";
                 "format-charging" = " {capacity}%";
                 "format-plugged" = " {capacity}%";
-                "format-alt" = "{icon} {time}";
                 "format-icons" = ["" "" "" "" ""];
             };
             "battery#bat2" = {
@@ -63,19 +61,7 @@
                 "format-full" = "{icon} {capacity}%";
                 "format-charging" = " {capacity}%";
                 "format-plugged" = " {capacity}%";
-                "format-alt" = "{icon} {time}";
                 "format-icons" = ["" "" "" "" ""];
-            };
-            "power-profiles-daemon" = {
-              "format" = "{icon}";
-              "tooltip-format" = "Power profile: {profile}\nDriver: {driver}";
-              "tooltip" = true;
-              "format-icons" = {
-                "default" = "";
-                "performance" = "";
-                "balanced" = "";
-                "power-saver" = "";
-              };
             };
             "bluetooth" = {
                 "format" = "";
@@ -126,6 +112,7 @@
                 /* Use box-shadow instead of border so the text isn't offset */
                 box-shadow: inset 0 -3px transparent;
                 /* Avoid rounded borders under each button name */
+
                 border: none;
                 border-radius: 4;
                 margin: 2 2;
@@ -156,22 +143,35 @@
             #wireplumber,
             #network,
             #backlight,
-            #power-profiles-daemon,
-            #battery,
             #clock,
+            #battery,
             #custom-power {
-                margin: 2 0;
-                padding: 0 10px;
+                margin: 2 2;
+                padding: 0 10;
                 color: @cursor;
                 border-radius: 4;
             }
 
+            #battery,
             #bluetooth,
             #wireplumber,
             #custom-power,
             #network {
                 background-color: @color4;
                 color: @background;
+            }
+
+            /* top right bottom left */
+            #battery {
+                padding: 0 5 0 10;
+                border-radius: 4 0 0 4;
+                margin: 2 0 2 2;
+            }
+
+            #battery.bat2 {
+                padding: 0 10 0 5;
+                border-radius: 0 4 4 0;
+                margin: 2 2 2 0;
             }
 
             #custom-power {
