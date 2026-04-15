@@ -33,7 +33,6 @@
     environment.systemPackages = with pkgs; [
       brightnessctl
       btop
-      dunst
       eog
       gnome-themes-extra
       kdePackages.breeze
@@ -77,6 +76,16 @@
           kb-remove-char-back = "BackSpace";
         };
         theme = "~/.cache/wal/colors-rofi-dark.rasi";
+      };
+
+      services.dunst = {
+        enable = true;
+        settings = {
+          global = {
+            font = "${self.font.mono} 13";
+            corner_radius = self.border.small;
+          };
+        };
       };
 
       services.polkit-gnome.enable = true; # Enable Gnome polkit.

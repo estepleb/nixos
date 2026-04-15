@@ -37,11 +37,6 @@
           input_path = '${builtins.toString ./templates/Matugen.colors}'
           output_path = '~/.local/share/color-schemes/Matugen.colors'
 
-          [templates.niri]
-          input_path = '${builtins.toString ./templates/niri-colors.kdl}'
-          output_path = '~/.config/niri/colors.kdl'
-          # post_hook = 'niri msg action load-config-file'
-
           [templates.qt5ct]
           input_path = '${builtins.toString ./templates/qtct-colors.conf}'
           output_path = '~/.config/qt5ct/colors/matugen.conf'
@@ -49,6 +44,16 @@
           [templates.qt6ct]
           input_path = '${builtins.toString ./templates/qtct-colors.conf}'
           output_path = '~/.config/qt6ct/colors/matugen.conf'
+
+          [templates.niri]
+          input_path = '${builtins.toString ./templates/niri-colors.kdl}'
+          output_path = '~/.config/niri/colors.kdl'
+          # post_hook = 'niri msg action load-config-file'
+
+          [templates.dunst]
+          input_path = '${builtins.toString ./templates/dunstrc-colors}'
+          output_path = '~/.config/dunst/dunstrc.d/00-style.conf'
+          post_hook = 'dunstctl reload'
         '';
         "kdeglobals".text = ''
           [UiSettings]

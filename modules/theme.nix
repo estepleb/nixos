@@ -10,8 +10,8 @@ let
   };
 
   border = {
-    main = "8";
-    small = "8";
+    main = "0";
+    small = "0";
   };
 in {
   flake = {
