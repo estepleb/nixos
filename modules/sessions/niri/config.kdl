@@ -3,6 +3,9 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
+include "./colors.kdl"
+include "./config-nix.kdl"
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
@@ -22,8 +25,8 @@ input {
             // localectl set-x11-keymap.
         }
 
-	repeat-delay 250
-	repeat-rate 25
+        repeat-delay 250
+        repeat-rate 25
 
         // Enable numlock on startup, omitting this setting disables it.
         // numlock
@@ -174,13 +177,12 @@ layout {
 
         // Color of the ring on the active monitor.
         // active-color "#7fc8ff"
-        active-color "#4c7f54"
 
         // Color of the ring on inactive monitors.
         //
         // The focus ring only draws around the active window, so the only place
         // where you can see its inactive-color is on other monitors.
-        inactive-color "#505050"
+        // inactive-color "#505050"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -205,11 +207,11 @@ layout {
         off
 
         width 2
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        // active-color "#ffc87f"
+        // inactive-color "#505050"
 
         // Color of the border around windows that request your attention.
-        urgent-color "#9b0000"
+        // urgent-color "#9b0000"
 
         // Gradients can use a few different interpolation color spaces.
         // For example, this is a pastel rainbow gradient via in="oklch longer hue".
@@ -253,7 +255,7 @@ layout {
         offset x=0 y=5
 
         // You can also change the shadow color and opacity.
-        color "#0007"
+        // color "#0007"
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
@@ -275,9 +277,6 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-// spawn-sh-at-startup "wal -i /home/matthew/Pictures/iriza-katou.jpg --cols16 --saturate 0.15"
-// spawn-sh-at-startup "matugen image /home/matthew/Pictures/iriza-katou.jpg --source-color-index 0";
-spawn-sh-at-startup "swaybg -i /home/matthew/Pictures/iriza-katou.jpg" // Wallpaper utility.
 spawn-at-startup "waybar" // Bar.
 spawn-at-startup "dunst" // Notification daemon.
 spawn-sh-at-startup "wlsunset -l 43.2 -L 76.9 -t 5000" // Night light utility.
@@ -363,7 +362,7 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 8
+    // geometry-corner-radius 0
     clip-to-geometry true
 }
 

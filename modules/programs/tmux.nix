@@ -1,6 +1,7 @@
+{ self, ... }:
 {
   flake.nixosModules.tmux = { pkgs, ... }: {
-    home-manager.users.matthew.imports = [
+    home-manager.users.${self.user}.imports = [
     {
       programs.tmux = {
         enable = true;

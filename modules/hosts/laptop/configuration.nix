@@ -10,15 +10,15 @@
     imports = [
       self.nixosModules.laptopHardware
 
-      self.nixosModules.fastfetch
+      self.nixosModules.base
       self.nixosModules.gamedev
       self.nixosModules.gaming
+
+      self.nixosModules.fastfetch
       self.nixosModules.home-manager
-      self.nixosModules.kitty
-      self.nixosModules.vpn
-      self.nixosModules.niri
+
       # self.nixosModules.plasma
-      self.nixosModules.zen-browser
+      self.nixosModules.niri
     ];
 
     # Use the systemd-boot EFI boot loader.
@@ -72,33 +72,16 @@
     };
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.matthew = {
+    users.users.${self.user} = {
       isNormalUser = true;
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [
         tree
       ];
     };
-
+  
+    # Allow unfree packages.
     nixpkgs.config.allowUnfree = true;
-
-    # List packages installed in system profile.
-    # You can use https://search.nixos.org/ to find more packages (and options).
-    environment.systemPackages = with pkgs; [
-      gnome-clocks
-      kdePackages.okular
-      kdePackages.partitionmanager
-      krita
-      obsidian
-      telegram-desktop
-      vesktop
-    ];
-
-    # List font packages installed in system profile.
-    fonts.packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.terminess-ttf
-    ];
 
     fileSystems = {
       "/".options = [ "compress=zstd" ];

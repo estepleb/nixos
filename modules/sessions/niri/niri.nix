@@ -3,8 +3,9 @@
   flake.nixosModules.niri = { pkgs, lib, config, ... }:
   {
     imports = [
-      self.nixosModules.waybar
+      self.nixosModules.kitty
       self.nixosModules.matugen
+      self.nixosModules.waybar
     ];
 
     programs.niri.enable = true;
@@ -47,17 +48,17 @@
       xwayland-satellite
     ];
 
-    home-manager.users.matthew.imports = [
+    home-manager.users.${self.user}.imports = [
     {
       home.activation = {
         pywal = ''
-          ${pkgs.pywal}/bin/wal -i /home/matthew/Pictures/iriza-katou.jpg --saturate 0.25
+          ${pkgs.pywal}/bin/wal -i ${self.wallpaper} --saturate 0.25
         '';
       };
 
       programs.rofi = {
         enable = true;
-        font = "${self.font}Mono 18";
+        font = "${self.font.mono} 18";
         extraConfig = {
           kb-row-up = "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
           kb-row-down = "Down,Control+j";
@@ -86,6 +87,14 @@
 
       # Symlink config file.
       xdg.configFile."niri/config.kdl".source = ./config.kdl;
+
+      # Write custom config file.
+      xdg.configFile."niri/config-nix.kdl".text = /* kdl */ ''
+        spawn-sh-at-startup "swaybg -i ${self.wallpaper}" // Wallpaper utility.
+        window-rule {
+            geometry-corner-radius ${self.border.main}
+        }
+      '';
 
       # Set default applications.
       xdg.mimeApps = {
@@ -124,7 +133,7 @@
           size = 24;
         };
         font = {
-          name = "${self.font}Mono";
+          name = "${self.font.mono}";
           size = 13;
         };
       };
@@ -136,15 +145,15 @@
 
         qt5ctSettings = {
           Fonts = {
-            fixed = "\"${self.font}Mono,13\"";
-            general = "\"${self.font}Mono,13\"";
+            fixed = "\"${self.font.mono},13\"";
+            general = "\"${self.font.mono},13\"";
           };
         };
 
         qt6ctSettings = {
           Fonts = {
-            fixed = "\"${self.font}Mono,13\"";
-            general = "\"${self.font}Mono,13\"";
+            fixed = "\"${self.font.mono},13\"";
+            general = "\"${self.font.mono},13\"";
           };
         };
       };

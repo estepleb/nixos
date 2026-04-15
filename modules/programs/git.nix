@@ -1,6 +1,7 @@
+{ self, ... }:
 {
   flake.nixosModules.git = {
-    home-manager.users.matthew.imports = [
+    home-manager.users.${self.user}.imports = [
     {
       programs.git = {
         enable = true;

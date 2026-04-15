@@ -6,11 +6,11 @@
       self.nixosModules.bash
     ];
 
-    home-manager.users.matthew.imports = [
+    home-manager.users.${self.user}.imports = [
     {
       home.activation = {
         matugen = ''
-          ${pkgs.matugen}/bin/matugen image /home/matthew/Pictures/iriza-katou.jpg --source-color-index 0
+          ${pkgs.matugen}/bin/matugen image ${self.wallpaper} --source-color-index 0
         '';
       };
       
@@ -37,6 +37,11 @@
           input_path = '${builtins.toString ./templates/Matugen.colors}'
           output_path = '~/.local/share/color-schemes/Matugen.colors'
 
+          [templates.niri]
+          input_path = '${builtins.toString ./templates/niri-colors.kdl}'
+          output_path = '~/.config/niri/colors.kdl'
+          # post_hook = 'niri msg action load-config-file'
+
           [templates.qt5ct]
           input_path = '${builtins.toString ./templates/qtct-colors.conf}'
           output_path = '~/.config/qt5ct/colors/matugen.conf'
@@ -57,14 +62,14 @@
 
         qt5ctSettings = {
           Appearance = {
-            color_scheme_path = "/home/matthew/.config/qt5ct/colors/matugen.conf";
+            color_scheme_path = "/home/${self.user}/.config/qt5ct/colors/matugen.conf";
             custom_palette = true;
           };
         };
 
         qt6ctSettings = {
           Appearance = {
-            color_scheme_path = "/home/matthew/.config/qt5ct/colors/matugen.conf";
+            color_scheme_path = "/home/${self.user}/.config/qt5ct/colors/matugen.conf";
             custom_palette = true;
           };
         };

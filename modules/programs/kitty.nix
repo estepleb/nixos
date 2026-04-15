@@ -1,12 +1,12 @@
 { self, ... }:
 {
   flake.nixosModules.kitty = {
-    home-manager.users.matthew.imports = [
+    home-manager.users.${self.user}.imports = [
     {
       programs.kitty = {
         enable = true;
         font = {
-          name = "${self.font}Mono";
+          name = "${self.font.mono}";
           size = 13;
         };
         settings = {

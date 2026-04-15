@@ -11,7 +11,7 @@
       extraSpecialArgs = { inherit inputs self; };
       backupCommand = "rm";
 
-      users.matthew = {
+      users.${self.user} = {
         home.stateVersion = "25.11";
         programs.home-manager.enable = true;
       };

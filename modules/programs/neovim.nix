@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   flake.nixosModules.neovim = {
-    home-manager.users.matthew.imports = [
+    home-manager.users.${self.user}.imports = [
       {
         imports = [ inputs.nvf.homeManagerModules.default ];
 
