@@ -52,7 +52,7 @@
     {
       home.activation = {
         pywal = ''
-          ${pkgs.pywal}/bin/wal -i ${self.wallpaper}
+          ${pkgs.pywal}/bin/wal --cols16 -i ${self.wallpaper}
         '';
         swaybg = ''
           ${pkgs.swaybg}/bin/swaybg -i ${self.wallpaper} &
