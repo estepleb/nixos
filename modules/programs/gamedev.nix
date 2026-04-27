@@ -10,6 +10,7 @@
     environment.systemPackages = with pkgs; [
       # aseprite
       (pkgs.bottles.override {removeWarningPopup = true; })
+      audacity
       dotnet-sdk
       godot-mono
       handbrake
