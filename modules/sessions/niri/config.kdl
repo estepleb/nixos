@@ -122,6 +122,9 @@ layout {
 
     always-center-single-column
 
+    // So wallpapers in the overview can be seen.
+    background-color "transparent"
+
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
@@ -323,6 +326,11 @@ animations {
 //     xcursor-theme "Bibata-Modern-Classic"
 //     xcursor-size 24
 // }
+
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
