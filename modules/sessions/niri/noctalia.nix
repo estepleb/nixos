@@ -289,7 +289,7 @@
             " = "unknown character to parse: h";
             deWeatherTimezone = false;
             hideWeatherCityName = false;
-            autoLocate = false;
+            autoLocate = true;
           };
           calendar = {
             cards = [
