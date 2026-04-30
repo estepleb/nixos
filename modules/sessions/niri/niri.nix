@@ -4,7 +4,8 @@
   {
     imports = [
       self.nixosModules.matugen
-      self.nixosModules.waybar
+      # self.nixosModules.waybar
+      self.nixosModules.noctalia
     ];
     
     nixpkgs.overlays = [ inputs.niri-flake.overlays.niri ];
@@ -47,9 +48,6 @@
       mpv
       nautilus
       pywal
-      python314Packages.haishoku
-      swaybg
-      waybar
       wl-clipboard
       wlsunset
       xwayland-satellite
@@ -59,12 +57,6 @@
       home.activation = {
         pywal = ''
           ${pkgs.pywal}/bin/wal --cols16 -i ${self.wallpaper}
-        '';
-        swaybg = ''
-          ${pkgs.swaybg}/bin/swaybg -i ${self.wallpaper} &
-        '';
-        waybar = ''
-          ${pkgs.procps}/bin/pkill -SIGUSR2 waybar
         '';
       };
 
@@ -112,7 +104,6 @@
 
       # Write custom config file.
       xdg.configFile."niri/config-nix.kdl".text = /* kdl */ ''
-        spawn-sh-at-startup "swaybg -i ${self.wallpaper}" // Wallpaper utility.
         window-rule {
             geometry-corner-radius ${self.border.main}
         }

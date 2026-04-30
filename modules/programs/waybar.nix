@@ -13,6 +13,12 @@
 
     home-manager.users.${self.user}.imports = [
     {
+      home.activation = {
+        waybar = ''
+          ${pkgs.procps}/bin/pkill -SIGUSR2 waybar
+        '';
+      };
+
       programs.waybar = {
         enable = true;
         settings = {
