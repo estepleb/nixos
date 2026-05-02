@@ -2,14 +2,14 @@
 {
   flake.nixosModules.gamedev = { pkgs, ... }: {
     imports = [
-      self.nixosModules.neovim
+      self.nixosModules.nvf
       self.nixosModules.tmux
       self.nixosModules.git
     ];
 
     environment.systemPackages = with pkgs; [
       # aseprite
-      (pkgs.bottles.override {removeWarningPopup = true; })
+      # (pkgs.bottles.override {removeWarningPopup = true; })
       audacity
       dotnet-sdk
       godot-mono

@@ -206,7 +206,7 @@
             forceBlackScreenCorners = false;
             scaleRatio = 1;
             radiusRatio = 1;
-            iRadiusRatio = 1.23;
+            iRadiusRatio = 1;
             boxRadiusRatio = 1;
             screenRadiusRatio = 1;
             animationSpeed = 1;

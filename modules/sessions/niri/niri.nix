@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ self, ... }:
 {
   flake.nixosModules.niri = { pkgs, lib, config, ... }:
   {
@@ -7,15 +7,10 @@
       # self.nixosModules.waybar
       self.nixosModules.noctalia
     ];
-    
-    nixpkgs.overlays = [ inputs.niri-flake.overlays.niri ];
 
     kitty.wal.enable = true;
 
-    programs.niri = {
-      enable = true;
-      package = pkgs.niri-unstable;
-    };
+    programs.niri.enable = true;
 
     services.displayManager.ly = 
     let

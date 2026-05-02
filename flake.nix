@@ -5,6 +5,11 @@
     import-tree.url = "github:vic/import-tree";
     # nix-wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
