@@ -18,7 +18,8 @@
       self.nixosModules.home-manager
 
       # self.nixosModules.cinnamon
-      self.nixosModules.niri
+      self.nixosModules.gnome
+      # self.nixosModules.niri
       # self.nixosModules.plasma
     ];
 
