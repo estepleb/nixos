@@ -22,6 +22,7 @@
           settings = {
             confirm_os_window_close = 0;
             remember_window_size = "no";
+            cursor_trail = 1;
           };
           extraConfig = lib.mkIf config.kitty.wal.enable ''
             include ~/.cache/wal/colors-kitty.conf

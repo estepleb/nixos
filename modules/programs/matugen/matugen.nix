@@ -2,10 +2,6 @@
 {
   flake.nixosModules.matugen = { pkgs, lib, ... }:
   {
-    imports = [
-      self.nixosModules.bash
-    ];
-
     home-manager.users.${self.user}.imports = [
     {
       # home.activation.matugen = "${pkgs.matugen}/bin/matugen image ${self.wallpaper} --source-color-index 0";
