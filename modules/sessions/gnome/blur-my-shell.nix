@@ -29,76 +29,76 @@ let
 
     nativeBuildInputs = with pkgs; [
       meson
-  ninja
-  pkg-config
-  gobject-introspection
-  wayland-scanner
-  desktop-file-utils
-  gettext
+      ninja
+      pkg-config
+      gobject-introspection
+      wayland-scanner
+      desktop-file-utils
+      gettext
     ];
 
     buildInputs = with pkgs; [
-    # Direct gnome-rounded-blur deps
-  glib
-  mutter
+      # Direct gnome-rounded-blur deps
+      glib
+      mutter
 
-  # Mutter/pkg-config deps
-  cairo
-  colord
-  lcms2
-  pango
-  libstartup_notification
-  libcanberra
-  libadwaita
-  libxcvt
-  libGL
-  mesa-gl-headers
+      # Mutter/pkg-config deps
+      cairo
+      colord
+      lcms2
+      pango
+      libstartup_notification
+      libcanberra
+      libadwaita
+      libxcvt
+      libGL
+      mesa-gl-headers
 
-  # X11 deps
-  libx11
-  libxcomposite
-  libxcursor
-  libxdamage
-  libxext
-  libxfixes
-  libxi
-  libxcb
-  libxrandr
-  libxinerama
-  libxau
-  libsm
+      # X11 deps
+      libx11
+      libxcomposite
+      libxcursor
+      libxdamage
+      libxext
+      libxfixes
+      libxi
+      libxcb
+      libxrandr
+      libxinerama
+      libxau
+      libsm
 
-  # Wayland / input / compositor deps
-  wayland
-  wayland-protocols
-  libinput
-  libdrm
-  libgbm
-  libei
-  libepoxy
-  libdisplay-info
-  libxkbcommon
-  xkeyboard_config
-  xwayland
+      # Wayland / input / compositor deps
+      wayland
+      wayland-protocols
+      libinput
+      libdrm
+      libgbm
+      libei
+      libepoxy
+      libdisplay-info
+      libxkbcommon
+      xkeyboard_config
+      xwayland
 
-  # GNOME / GTK deps
-  gsettings-desktop-schemas
-  gdk-pixbuf
-  gnome-desktop
-  gnome-settings-daemon
-  gtk4
-  atk
-  fribidi
-  harfbuzz
-  graphene
+      # GNOME / GTK deps
+      gsettings-desktop-schemas
+      gdk-pixbuf
+      gnome-desktop
+      gnome-settings-daemon
+      gtk4
+      atk
+      fribidi
+      harfbuzz
+      graphene
 
-  # Other Mutter deps
-  pipewire
-  libgudev
-  libwacom
-  sysprof
-  libsysprof-capture
-  libglycin
+      # Other Mutter deps
+      pipewire
+      libgudev
+      libwacom
+      sysprof
+      libsysprof-capture
+      libglycin
     ];
 
     postPatch = ''
