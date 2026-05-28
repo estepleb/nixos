@@ -6,6 +6,7 @@
       self.nixosModules.kitty
       self.nixosModules.vpn
       self.nixosModules.zen-browser
+      self.nixosModules.nvf
     ];
 
     # List packages installed in system profile.

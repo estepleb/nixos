@@ -8,6 +8,11 @@
         inputs.noctalia.homeModules.default
       ];
 
+      home.packages = with pkgs; [
+        kdePackages.breeze
+        kdePackages.breeze-icons
+      ];
+
       home.sessionVariables = {
         QS_ICON_THEME = "breeze-dark";
       };
@@ -18,7 +23,7 @@
           settingsVersion = 59;
           bar = {
             barType = "simple";
-            position = "left";
+            position = "bottom";
             monitors = [];
             density = "spacious";
             showOutline = false;
@@ -367,7 +372,7 @@
             enableClipboardChips = true;
             clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
             clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
-            position = "center";
+            position = "follow_bar";
             pinnedApps = [];
             sortByMostUsed = true;
             terminalCommand = "alacritty -e";
@@ -667,7 +672,7 @@
           };
           hooks = {
             enabled = true;
-            wallpaperChange = "wal --cols16 -i $1 & matugen image $1 --source-color-index 0";
+            wallpaperChange = "wal --cols16 -i $1 & matugen image $1 --opacity 0.85 --source-color-index 0";
             darkModeChange = "";
             screenLock = "";
             screenUnlock = "";

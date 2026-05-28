@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ self, ... }:
+{ self, inputs, ... }:
 {
   flake.nixosModules.laptop = { pkgs, ... }: {
 
@@ -19,6 +19,7 @@
 
       # self.nixosModules.cinnamon
       # self.nixosModules.gnome
+      # self.nixosModules.hyprland
       self.nixosModules.niri
       # self.nixosModules.plasma
     ];
@@ -83,6 +84,22 @@
         CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
         PLATFORM_PROFILE_ON_BAT = "performance";
       };
+    };
+
+    # Enable OpenCL support.
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = 
+      let
+        pkgs = import inputs.nixpkgs-c5ae371f1 {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        }; 
+      in 
+      [ 
+        pkgs.intel-compute-runtime-legacy1 # Use the latest driver commit that worked with DaVinci Resolve.
+      ];
     };
 
     # Define a user account. Don't forget to set a password with ‘passwd’.

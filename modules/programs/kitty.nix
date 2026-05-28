@@ -11,8 +11,7 @@
     };
 
     config = {
-      home-manager.users.${self.user}.imports = [
-      {
+      home-manager.users.${self.user} = {
         programs.kitty = {
           enable = true;
           font = {
@@ -30,8 +29,7 @@
           '';
           themeFile = lib.mkIf (!config.kitty.wal.enable) "Catppuccin-Mocha";
         };
-      }
-      ];
+      };
     };
   };
 }

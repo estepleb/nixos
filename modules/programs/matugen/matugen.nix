@@ -1,13 +1,36 @@
 { self, ... }:
 {
   flake.nixosModules.matugen = { pkgs, lib, ... }:
-  {
+  let 
+      # Building the latest matugen 4.1.0 for --opacity flag.
+      matugen = pkgs.matugen.overrideAttrs (old: {
+        version = "4.1.0";
+        src = pkgs.fetchFromGitHub {
+          owner = "InioX";
+          repo = "matugen";
+          rev = "v4.1.0";
+          hash = "sha256-xzwMDWb6pF3oStVoS8enNhpYptxdnB1NSIO7dUH6/qk=";
+        };
+        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+          inherit (old) pname;
+          version = "4.1.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "InioX";
+            repo = "matugen";
+            rev = "v4.1.0";
+            hash = "sha256-xzwMDWb6pF3oStVoS8enNhpYptxdnB1NSIO7dUH6/qk=";
+          };
+          hash = "sha256-bfvlPiTlPQeedo+ikHXSI8NqdA5R5M7gCsgx7srYsMQ=";
+        };
+      });
+  in{
+    environment.systemPackages = [ matugen ];
+
     home-manager.users.${self.user}.imports = [
     {
-      # home.activation.matugen = "${pkgs.matugen}/bin/matugen image ${self.wallpaper} --source-color-index 0";
+      home.activation.matugen = "${matugen}/bin/matugen image ${self.wallpaper} --opacity 0.85 --source-color-index 0";
       
-      home.packages = with pkgs; [ 
-        matugen
+      home.packages = with pkgs; [
         kdePackages.breeze
         kdePackages.qt6ct
         killall
@@ -38,6 +61,14 @@
             input_path = '${builtins.toString ./templates/qtct-colors.conf}'
             output_path = '~/.config/qt6ct/colors/matugen.conf'
 
+            [templates.kvantum_kvconfig]
+            input_path = '${builtins.toString ./templates/kvantum-colors.kvconfig}'
+            output_path = '~/.config/Kvantum/matugen/matugen.kvconfig'
+            
+            [templates.kvantum_svg]
+            input_path = '${builtins.toString ./templates/kvantum-colors.svg}'
+            output_path = '~/.config/Kvantum/matugen/matugen.svg'
+
             [templates.niri]
             input_path = '${builtins.toString ./templates/niri-colors.kdl}'
             output_path = '~/.config/niri/colors.kdl'
@@ -48,17 +79,20 @@
           '';
         };
 
-        "kdeglobals" = {
-          text = ''
-            [UiSettings]
-            ColorScheme=Matugen
-          '';
-        };
+        "kdeglobals".text = ''
+          [UiSettings]
+          ColorScheme=Matugen
+        '';
+        "Kvantum/kvantum.kvconfig".text = ''
+          [General]
+          theme=matugen
+        '';
       };
 
       qt = {
         enable = true;
         platformTheme.name = lib.mkForce "qt6ct";
+        style.name = lib.mkForce "kvantum";
 
         qt5ctSettings = {
           Appearance = {
