@@ -23,7 +23,8 @@
           settingsVersion = 59;
           bar = {
             barType = "simple";
-            position = "bottom";
+            # position = "bottom";
+            position = "left";
             monitors = [];
             density = "spacious";
             showOutline = false;
