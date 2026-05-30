@@ -79,11 +79,11 @@
                     colorizeSystemIcon = "none";
                     colorizeSystemText = "none";
                     customIconPath = "";
-                    enableColorization = false;
+                    enableColorization = true;
                     icon = "rocket";
                     iconColor = "none";
                     id = "Launcher";
-                    useDistroLogo = false;
+                    useDistroLogo = true;
                   }
                   {
                     clockColor = "none";
