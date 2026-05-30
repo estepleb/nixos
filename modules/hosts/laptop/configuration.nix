@@ -29,6 +29,9 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = 1;
 
+    # Use latest kernel.
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     # Use the GRUB EFI boot loader.
     # boot.loader = {
     #   grub = {
@@ -105,7 +108,7 @@
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${self.user} = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [
         tree
       ];

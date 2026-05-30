@@ -3,7 +3,6 @@
   flake.nixosModules.niri = { pkgs, lib, config, ... }:
   {
     imports = [
-      # self.nixosModules.waybar
       self.nixosModules.dolphin
       self.nixosModules.labwc
       self.nixosModules.ly
@@ -35,24 +34,8 @@
     ];
 
     home-manager.users.${self.user} = { config, ... }: {
-      programs.rofi = {
-        enable = true;
-        font = "${self.font.mono} 18";
-        extraConfig = {
-          kb-row-up = "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
-          kb-row-down = "Down,Control+j";
-          kb-accept-entry = "Control+m,Return,KP_Enter";
-          kb-remove-to-eol = "Control+Shift+e";
-          kb-mode-next = "Shift+Right,Control+Tab,Control+l";
-          kb-mode-previous = "Shift+Left,Control+Shift+Tab,Control+h";
-          kb-mode-complete = "";
-          kb-remove-char-back = "BackSpace";
-        };
-        theme = "~/.cache/wal/colors-rofi-dark.rasi";
-      };
 
       services.polkit-gnome.enable = true; # Enable Gnome polkit.
-
       systemd.user.services.polkit-gnome = {
         Service = {
           Restart = "on-failure";
@@ -90,51 +73,6 @@
           "video/webm" = videoViewer;
         };
       };
-
-      # # Set cursor theme.
-      # home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Classic";
-      #
-      # # Set dark theme for GTK programs.
-      # dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-      #
-      # # Set GTK theme.
-      # gtk = {
-      #   enable = true;
-      #   gtk4.theme = null;
-      #   theme = {
-      #     name = "adw-gtk3-dark";
-      #     package = pkgs.adw-gtk3;
-      #   };
-      #   cursorTheme = {
-      #     name = "Bibata-Modern-Classic";
-      #     package = pkgs.bibata-cursors;
-      #     size = 24;
-      #   };
-      #   font = {
-      #     name = "${self.font.mono}";
-      #     size = 13;
-      #   };
-      # };
-      #
-      # # Make QT follow GTK theme.
-      # qt = {
-      #   enable = true;
-      #   platformTheme.name = "gtk3";
-      #
-      #   qt5ctSettings = {
-      #     Fonts = {
-      #       fixed = "\"${self.font.mono},13\"";
-      #       general = "\"${self.font.mono},13\"";
-      #     };
-      #   };
-      #
-      #   qt6ctSettings = {
-      #     Fonts = {
-      #       fixed = "\"${self.font.mono},13\"";
-      #       general = "\"${self.font.mono},13\"";
-      #     };
-      #   };
-      # };
     };
   };
 }

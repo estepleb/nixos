@@ -19,7 +19,7 @@
           settings = {
             vim = {
               luaConfigPost = /* lua */ ''
-                vim.opt.shiftwidth = 2
+                vim.opt.shiftwidth = 4
                 -- vim.opt.colorcolumn = "80"
               '';
               treesitter.indent.enable = false;
@@ -56,8 +56,8 @@
 
               theme = {
                 enable = true;
-                name = "gruvbox";
-                style = "dark";
+                name = "catppuccin";
+                style = "mocha";
               };
 
               statusline = {
@@ -116,6 +116,15 @@
                   ];
                   key = "<C-n>";
                   action = "<cmd>Neotree toggle left<CR>";
+                }
+                {
+                  key = "<F3>";
+                  mode = [
+                    "n"
+                    "v"
+                  ];
+                  lua = true;
+                  action = "function() vim.lsp.buf.format({ async = true }) end";
                 }
 
                 {
