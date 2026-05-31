@@ -43,6 +43,7 @@
           pluginSettings = {
             slowbongo = {
               catSize = 1.5;
+              tappyMode = true;
               inputDevices = [ "/dev/input/event0" ];
             };
           };
