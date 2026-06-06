@@ -1,0 +1,59 @@
+{ self, ... }: 
+{
+  flake.nixosModules."caddy-tailscale" = { config, lib, pkgs, ... }: 
+  let
+    domain = self.tailnet;
+    proxmoxIP = "192.168.12.150:8006";
+    adguardIP = "192.168.12.94:80";
+    dnsIP = "192.168.12.94:53";
+  in
+  {
+	sops.secrets.tsauthkey = {
+        sopsFile = "${self.secretsPath}/secrets.yaml";
+	    format = "yaml";
+	    owner = config.services.caddy.user;
+	    group = config.services.caddy.group;
+	    mode = "0400";
+	  };
+	  environment.systemPackages = with pkgs; [ caddy ];
+	  
+	  services.caddy = {
+	    enable = true;
+	    package = pkgs.caddy.withPlugins {
+	      plugins = [
+	        "github.com/jasonlovesdoggo/caddy-defender@v0.8.5"
+	        "github.com/tailscale/caddy-tailscale@v0.0.0-20260106222316-bb080c4414ac"
+	      ];
+	      hash = "sha256-IBorZQi+xrxHqHwhIZiKSr4FuPEkroCoyfMGs9BNgks=";
+	    };
+	    globalConfig = ''
+	      servers {
+	      }
+	    '';
+	    environmentFile = config.sops.secrets.tsauthkey.path;
+	    virtualHosts = {
+	      "proxmox.${domain}" = {
+	        extraConfig = ''
+	          bind tailscale/proxmox
+	          encode zstd gzip
+	          reverse_proxy https://${proxmoxIP}
+	        '';
+	      };
+	      "adguard.${domain}" = {
+	        extraConfig = ''
+	          bind tailscale/adguard
+	          encode zstd gzip
+	          reverse_proxy ${adguardIP}
+	        '';
+	      };
+	      "dns.${domain}" = {
+	        extraConfig = ''
+	          bind tailscale/dns
+	          encode zstd gzip
+	          reverse_proxy ${dnsIP}
+	        '';
+	      };
+	    };
+	  };
+	};
+}

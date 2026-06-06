@@ -8,7 +8,7 @@
     };
   };
   perSystem = { pkgs, lib, ... }: {
-    packages.wrappedNiri = inputs.nix-wrapper-modules.wrappers.niri.wrap {
+    packages.wrappedNiri = inputs.wrappers.wrappers.niri.wrap {
       inherit pkgs;
       settings = {
         input = {

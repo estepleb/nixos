@@ -35,12 +35,12 @@
       };
 
       "org/cinnamon/desktop/background" = {
-        picture-uri = "file:///home/matthew/Pictures/clem_calm.jpg";
+        picture-uri = "file:///home/${config.var.username}/Pictures/clem_calm.jpg";
       };
 
       "org/cinnamon/desktop/background/slideshow" = {
         delay = 15;
-        image-source = "directory:///home/matthew/Pictures";
+        image-source = "directory:///home/${config.var.username}/Pictures";
       };
 
       "org/cinnamon/desktop/input-sources" = {

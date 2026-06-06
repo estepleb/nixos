@@ -10,11 +10,8 @@
       useUserPackages = true;
       extraSpecialArgs = { inherit inputs self; };
       backupCommand = "rm";
-
-      users.${self.user} = {
-        home.stateVersion = "26.05";
-        programs.home-manager.enable = true;
-      };
+      backupFileExtension = "hm-backup";
     };
   };
 }
+
