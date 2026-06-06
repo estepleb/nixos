@@ -2,6 +2,7 @@
   flake.nixosModules.tailscale = 
     {
       config,
+      pkgs,
       inputs,
       ...
     }: {
@@ -24,7 +25,7 @@
     
       services.tailscale = {
         enable = true;
-        package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.tailscale;
+        package = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tailscale;
         openFirewall = true;
       };
     
@@ -35,8 +36,6 @@
         trustedInterfaces = ["tailscale0"];
         # required to connect to Tailscale exit nodes
         checkReversePath = "loose";
-        # Allow the Tailscale UDP port through the firewall
-        allowedUDPPorts = [ config.services.tailscale.port ];
       };
     
       # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)

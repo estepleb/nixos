@@ -25,7 +25,7 @@
   #     });
   # in
   {
-    environment.systemPackages = [ inputs.matugen.packages."x86_64-linux".default ];
+    environment.systemPackages = [ inputs.matugen.packages.${pkgs.stdenv.hostPlatform.system}.default ];
 
     home-manager.users.${self.user}.imports = [
     {

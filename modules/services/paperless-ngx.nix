@@ -1,5 +1,5 @@
 { self, ... }: {
-  flake.nixosModules.paperless = { config, lib, pkgs, ... }: 
+  flake.nixosModules.paperless-ngx = { config, lib, pkgs, ... }: 
     let
       service       = "paperless-ngx";
       prettyName    = "Paperless-ngx";

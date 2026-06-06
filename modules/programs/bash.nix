@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.nixosModules.bash = {
-    home-manager.users.${self.user}.imports = [
+    home-manager.users.${self.username}.imports = [
       {
         programs.bash = {
           enable = true;

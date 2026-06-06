@@ -6,8 +6,8 @@
 
     programs.niri = {
       enable = true;
-      package = inputs.niri.packages.${pkgs.system}.default;
-    };
+      package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          };
 
     # Add required graphics drivers
     hardware.graphics = {

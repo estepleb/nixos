@@ -2,6 +2,7 @@
   flake.nixosConfigurations.nix-vm = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.nix-vm-hardware
+      self.nixosModules.nix-vm-secrets
       
       # Boot
       self.nixosModules."grub-vm"
@@ -26,7 +27,7 @@
       self.nixosModules.syncthing
       self.nixosModules.ollama
       self.nixosModules."homepage-dashboard"
-      self.nixosModules.paperless
+      self.nixosModules.paperless-ngx
       self.nixosModules."docling-serve"
       self.nixosModules."filebrowser-quantum"
       

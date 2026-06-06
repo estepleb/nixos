@@ -4,8 +4,6 @@
       enable = true;
       allowedTCPPorts = [ 22 80 443 ];
       allowedUDPPorts = [ 443 ];
-      # Allow incoming connections from VPN/tailscale interface
-      trustedInterfaces = [ "tailscale0" ];
     };
   };
 }
