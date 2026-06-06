@@ -54,6 +54,7 @@
   };
 
   # Import all .nix files from current directory except flake.nix recursively
+  # From: https://github.com/vimjoyer/nixconf
   outputs = inputs: let
     inherit (inputs.nixpkgs) lib;
     inherit (lib.fileset) toList fileFilter;
