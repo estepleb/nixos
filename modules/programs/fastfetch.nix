@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.nixosModules.fastfetch = {
-    home-manager.users.${self.user}.imports = [
+    home-manager.users.${self.username}.imports = [
       {
         programs.fastfetch = {
           enable = true;

@@ -8,7 +8,7 @@
       # Add ‘input’ for slowbango :3
       users.users.${self.user}.extraGroups = [ "input" ];
 
-      home-manager.users.${self.user} = {
+      home-manager.users.${self.username} = {
         imports = [
           inputs.noctalia.homeModules.default
         ];

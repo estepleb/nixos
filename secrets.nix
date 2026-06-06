@@ -1,5 +1,6 @@
-{ ... }: {
+{ ... }:
+{
   flake = {
-    secretsPath  = ./hosts/nix-vm/secrets;
+    secretsPath = ./hosts/nix-vm/secrets;
   };
 }

@@ -1,18 +1,24 @@
-{ self, ... }: {
-  flake.nixosModules.opencloud = { config, pkgs, ... }:
+{ self, ... }:
+{
+  flake.nixosModules.opencloud =
+    {
+      config,
+      pkgs,
+      ...
+    }:
     let
-      service       = "opencloud";
-      prettyName    = "Opencloud";
-      hostname      = ""; # Overrides service as hostname
-      description   = "Cloud storage";
-      category      = "Personal";
-      icon          = "opencloud.png";
-      port          = 9200;
+      service = "opencloud";
+      prettyName = "Opencloud";
+      hostname = ""; # Overrides service as hostname
+      description = "Cloud storage";
+      category = "Personal";
+      icon = "opencloud.png";
+      port = 9200;
 
       # Logic
-      resolvedHost  = if hostname != "" then hostname else service;
-      domain        = self.tailnet;
-      fqdn          = "${resolvedHost}.${domain}";
+      resolvedHost = if hostname != "" then hostname else service;
+      domain = self.tailnet;
+      fqdn = "${resolvedHost}.${domain}";
     in
     {
       sops.secrets.opencloud-env = {
@@ -22,7 +28,7 @@
         group = config.services.opencloud.group;
         mode = "0400";
       };
-    
+
       services.homepage-dashboard.services = [
         {
           "Personal" = [
@@ -36,7 +42,7 @@
           ];
         }
       ];
-      
+
       services.caddy.virtualHosts."${fqdn}" = {
         extraConfig = ''
           bind tailscale/${resolvedHost}
@@ -44,7 +50,7 @@
           reverse_proxy 127.0.0.1:${toString port}
         '';
       };
-    
+
       services.opencloud = {
         enable = true;
         url = "https://${fqdn}";
@@ -52,17 +58,17 @@
         address = "127.0.0.1";
         inherit port;
         environmentFile = config.sops.secrets.opencloud-env.path;
-    
+
         environment = {
           OC_INSECURE = "true";
           OC_LOG_LEVEL = "warn";
           PROXY_TLS = "false";
           COLLABORATION_APP_NAME = "OnlyOffice"; # PascalCase name of service
-          COLLABORATION_APP_PRODUCT = "Onlyoffice";# Collabora, OnlyOffice, Microsoft365 or MicrosoftOfficeOnline
+          COLLABORATION_APP_PRODUCT = "Onlyoffice"; # Collabora, OnlyOffice, Microsoft365 or MicrosoftOfficeOnline
           COLLABORATION_APP_ADDR = "office.${domain}"; # The URL of the collaborative editing app (onlyoffice, collabora, etc).
           COLLABORATION_APP_INSECURE = "false"; # In case you are using a self signed certificate for the WOPI app you can tell the collaboration service to allow an insecure connection.
           COLLABORATION_WOPI_SRC = "office.${domain}"; # The external address of the collaboration service. The target app (onlyoffice, collabora, etc) will use this address to read and write files from OpenCloud.
-          
+
           # Uncomment when Authelia is ready:
           # OC_EXCLUDE_RUN_SERVICES = "idp";
           # OC_OIDC_ISSUER = oidcIssuer;
@@ -80,7 +86,7 @@
           # PROXY_USER_CS3_CLAIM = "username";
           # GRAPH_USERNAME_MATCH = "none";
         };
-    
+
         settings = {
           opencloud = {
             graph.spaces.insecure = true;

@@ -1,44 +1,47 @@
-{ self, ... }: 
+{ self, ... }:
 {
-  flake.nixosModules.NAME = { config, pkgs, ... }:
-  let
-    domain = "NAME.${self.tailnet}";
-    port = 9200;
-    # Uncomment when Authelia is ready:
-    # oidcIssuer = "https://auth.${config.var.tailnet}";
-    # oidcClientId = "opencloud";
-  in
-  {
-    sops.secrets.opencloud-env = {
-      sopsFile = "${self.secretsPath}/secrets.yaml";
-      format = "dotenv";
-      owner = config.services.opencloud.user;
-      group = config.services.opencloud.group;
-      mode = "0400";
+  flake.nixosModules.NAME =
+    { config, pkgs, ... }:
+    let
+      service = "";
+      prettyName = "";
+      hostname = ""; # Overrides service as hostname
+      description = "";
+      category = "";
+      icon = ".png";
+      port = 8000;
+
+      # Logic
+      resolvedHost = if hostname != "" then hostname else service;
+      domain = self.tailnet;
+      fqdn = "${resolvedHost}.${domain}";
+    in
+    {
+      sops.secrets.${service} = {
+        sopsFile = "${self.secretsPath}/secrets.yaml";
+        mode = "0400";
+      };
+
+      services.homepage-dashboard.services = [
+        {
+          "${category}" = [
+            {
+              "${prettyName}" = {
+                icon = "${icon}";
+                description = "${description}";
+                href = "https://${fqdn}";
+              };
+            }
+          ];
+        }
+      ];
+
+      services.caddy.virtualHosts."${fqdn}" = {
+        extraConfig = ''
+          bind tailscale/{resolvedHost}
+          encode zstd gzip
+          reverse_proxy 127.0.0.1:${toString port}
+        '';
+      };
     };
-  
-    services.homepage-dashboard.services = [
-      {
-        "Personal" = [
-          {
-            "Opencloud" = {
-              icon = "opencloud.png";
-              description = "File share cloud";
-              href = "https://${domain}";
-            };
-          }
-        ];
-      }
-    ];
-    
-    services.caddy.virtualHosts."${domain}" = {
-      extraConfig = ''
-        bind tailscale/opencloud
-        encode zstd gzip
-        reverse_proxy 127.0.0.1:${toString port}
-      '';
-    };
-  
-  
-  }
-  
+}

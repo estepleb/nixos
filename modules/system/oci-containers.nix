@@ -1,11 +1,14 @@
-{ ... }: {
-  flake.nixosModules."oci-containers" = { config, ... }: {
-    virtualisation.oci-containers = {
-      backend = "podman";
+{ ... }:
+{
+  flake.nixosModules."oci-containers" =
+    { config, ... }:
+    {
+      virtualisation.oci-containers = {
+        backend = "podman";
+      };
+
+      virtualisation.containers.containersConf.settings = {
+        network.firewall_driver = "nftables";
+      };
     };
-  
-    virtualisation.containers.containersConf.settings = {
-      network.firewall_driver = "nftables";
-    };
-  };
 }

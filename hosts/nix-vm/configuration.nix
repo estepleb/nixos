@@ -1,15 +1,18 @@
-{ self, inputs, ... }: {
+{ self, inputs, ... }:
+{
   flake.nixosConfigurations.nix-vm = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.nix-vm-hardware
       self.nixosModules.nix-vm-secrets
-      
+      self.nixosModules.nix-vm-home
+
       # Boot
       self.nixosModules."grub-vm"
       self.nixosModules."mac-style-plymouth"
-      
+
       # System modules
       self.nixosModules.home-manager
+      self.nixosModules.fish
       self.nixosModules.nix
       self.nixosModules.users
       self.nixosModules.utils
@@ -30,42 +33,37 @@
       self.nixosModules.paperless-ngx
       self.nixosModules."docling-serve"
       self.nixosModules."filebrowser-quantum"
-      
-      # Import hardware-specific configuration  
-      ({ config, lib, pkgs, ... }: {
-        _module.args = {inherit self inputs;};
-        # Don't touch this
-        system.stateVersion = "25.11";
-      })
-      
+
+      # Import hardware-specific configuration
+      (
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        {
+          _module.args = { inherit self inputs; };
+          # Don't touch this
+          system.stateVersion = "25.11";
+        }
+      )
+
       # Additional packages
-      ({ config, pkgs, ... }: {
-        environment.systemPackages = with pkgs; [
-          wget
-          curl
-          git
-          chezmoi
-          fish
-          zoxide
-          eza 
-          bat
-          fzf
-          micro
-          btrfs-progs
-          fastfetch
-          nix-search-cli
-          openssl
-          nh
-          psmisc
-          opencode
-        ];
-        
-        nixpkgs.overlays = [ ];
-      })
-      
+      (
+        { config, pkgs, ... }:
+        {
+          environment.systemPackages = with pkgs; [
+
+          ];
+
+          nixpkgs.overlays = [ ];
+        }
+      )
+
       # SOPS-Nix integration
       inputs.sops-nix.nixosModules.sops
     ];
-    
+
   };
 }

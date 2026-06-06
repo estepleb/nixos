@@ -1,8 +1,9 @@
-{ self, inputs, ... }: {
+{ self, inputs, ... }:
+{
   flake.nixosConfigurations.thinkbook-plus = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.thinkbook-plus-hardware
-      
+
       self.nixosModules.audio
       self.nixosModules.bluetooth
       self.nixosModules.fonts
@@ -22,18 +23,26 @@
 
       # Base system
       self.nixosModules.base
-      
-      # Import hardware-specific configuration  
-      ({ config, lib, pkgs, ... }: {
-        nixpkgs.overlays = [
-          inputs.mac-style-plymouth.overlays.default
-        ];
-        _module.args = {
-          inherit inputs;
-          nixpkgs-stable = inputs.nixpkgs-stable;
-        };
-      })
-      
+
+      # Import hardware-specific configuration
+      (
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        {
+          nixpkgs.overlays = [
+            inputs.mac-style-plymouth.overlays.default
+          ];
+          _module.args = {
+            inherit inputs;
+            nixpkgs-stable = inputs.nixpkgs-stable;
+          };
+        }
+      )
+
       # Home Manager integration
       inputs.home-manager.nixosModules.home-manager
       inputs.stylix.nixosModules.stylix
