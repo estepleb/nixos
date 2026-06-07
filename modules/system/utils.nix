@@ -97,6 +97,8 @@
         openssl
         btrfs-progs
         psmisc
+
+        nvme-cli
       ];
     };
 }

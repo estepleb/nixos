@@ -87,20 +87,20 @@
         package = pkgs.homepage-dashboard;
         allowedHosts = "localhost:${toString port},127.0.0.1:${toString port},${fqdn}";
         settings = {
-          providers = {
-            openweathermap = "openweathermapapikey";
-            weatherapi = "weatherapiapikey";
-            paperlessngx = {
-              key = "4cb374414d6eb3177c69913d49b8d62741ca6732";
-            };
-            arcane = {
-              key = "{{HOMEPAGE_VAR_ARCANE_KEY}}";
-            };
-            kopia = {
-              username = "estepleb";
-              password = "ZitRogue2";
-            };
-          };
+          # providers = {
+          #   openweathermap = "openweathermapapikey";
+          #   weatherapi = "weatherapiapikey";
+          #   paperlessngx = {
+          #     key = "";
+          #   };
+          #   arcane = {
+          #     key = "";
+          #   };
+          #   kopia = {
+          #     username = "";
+          #     password = "";
+          #   };
+          # };
         };
         bookmarks = [
           {
