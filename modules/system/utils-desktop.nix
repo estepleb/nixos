@@ -10,6 +10,21 @@
       keyboardLayout = self.keyboardLayout;
     in
     {
+
+      environment.systemPackages = with pkgs; [
+        bitwarden
+        btrfs-assistant
+        capitaine-cursors
+        cava
+        chezmoi
+        ungoogled-chromium
+        equibop
+        foot
+        localsend
+        mission-center
+        obsidian
+      ];
+
       services = {
         xserver = {
           enable = false;

@@ -97,6 +97,9 @@
         openssl
         btrfs-progs
         psmisc
+        rsync
+        snapper
+        btrbk
 
         nvme-cli
       ];
